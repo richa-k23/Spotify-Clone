@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthContext, AuthProvider } from './Context';
+import { AuthContext, AuthProvider } from './Context.jsx';
 import Signup from './components/Signup.jsx';
 import Signin from './components/Signin.jsx';
 import Home from './components/Home.jsx';
