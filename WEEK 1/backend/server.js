@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const app = express();
-const PORT = 6000;
+const PORT = 3000;
 const DB_URI = 'mongodb://127.0.0.1:27017/spotify_clone';
 
 app.use(cors());

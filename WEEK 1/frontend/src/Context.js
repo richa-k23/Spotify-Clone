@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";  
 
 export const AuthContext = createContext();
 
@@ -21,17 +21,18 @@ export const AuthProvider = ({ children }) => {
             setToken(savedToken);
         }
     }, []);
-    return (
-        <AuthContext.Provider value={{ token, login, logout }}>
-            {children}
-        </AuthContext.Provider>
+
+    return React.createElement(
+        AuthContext.Provider,
+        { value: { token, login, logout } },
+        children
     );
 };
 
 export const CombinedProvider = ({ children }) => {
-    return (
-        <AuthProvider>
-            {children}
-        </AuthProvider>
+    return React.createElement(
+        AuthProvider,
+        null,
+        children
     );
 };
