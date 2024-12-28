@@ -7,16 +7,16 @@ export const AuthProvider = ({ children }) => {
 
     const login = (newToken) => {
         setToken(newToken);
-        localStorage.setItem('authToken', newToken);
+        localStorage.setItem("authToken", newToken);
     };
 
     const logout = () => {
         setToken(null);
-        localStorage.removeItem('authToken');
+        localStorage.removeItem("authToken");
     };
 
     useEffect(() => {
-        const savedToken = localStorage.getItem('authToken');
+        const savedToken = localStorage.getItem("authToken");
         if (savedToken) {
             setToken(savedToken);
         }
@@ -29,10 +29,23 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
+export const MusicContext = createContext();
+
+export const MusicProvider = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [resultOffset, setResultOffset] = useState(0);
+
+    return React.createElement(
+        MusicContext.Provider,
+        { value: { isLoading, setIsLoading, resultOffset, setResultOffset } },
+        children
+    );
+};
+
 export const CombinedProvider = ({ children }) => {
     return React.createElement(
         AuthProvider,
         null,
-        children
+        React.createElement(MusicProvider, null, children)
     );
 };

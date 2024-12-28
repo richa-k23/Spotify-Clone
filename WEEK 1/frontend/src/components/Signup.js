@@ -59,6 +59,7 @@ function Signup() {
                     onChange: (e) => setEmail(e.target.value),
                     required: true,
                     className: 'form-control',
+                    autoComplete: 'email',
                 })
             ),
             React.createElement(
@@ -68,6 +69,7 @@ function Signup() {
                 React.createElement('input', {
                     id: 'password',
                     type: 'password',
+                    name: 'password',
                     value: password,
                     onChange: (e) => setPassword(e.target.value),
                     required: true,

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthContext, AuthProvider } from './Context';
+import { AuthContext, CombinedProvider } from './Context';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Home from './components/Home';
@@ -23,8 +23,9 @@ function App() {
 
 export default function AppWrapper() {
     return React.createElement(
-        AuthProvider,
+        CombinedProvider, 
         null,
         React.createElement(App, null)
     );
 }
+

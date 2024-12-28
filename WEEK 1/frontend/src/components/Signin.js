@@ -51,14 +51,16 @@ function Signin() {
             React.createElement(
                 'div',
                 { className: 'form-group' },
-                React.createElement('label', null, 'Email:'),
+                React.createElement('label', { htmlFor: 'email' }, 'Email:'),
                 React.createElement('input', {
+                    id: 'email',
                     type: 'email',
                     value: email,
+                    name: 'email',
                     onChange: (e) => setEmail(e.target.value),
                     required: true,
-                    autoComplete: 'email',
                     className: 'form-control',
+                    autoComplete: 'email',
                 })
             ),
             React.createElement(
@@ -68,6 +70,7 @@ function Signin() {
                 React.createElement('input', {
                     type: 'password',
                     value: password,
+                    name: 'password',
                     onChange: (e) => setPassword(e.target.value),
                     required: true,
                     autoComplete: 'current-password',

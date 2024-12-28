@@ -1,0 +1,44 @@
+.navbar-custom {
+    background-color: #121212;
+    height: 80px;
+}
+
+.navbar-custom .navbar-brand {
+    color: #1DB954;
+    font-weight: 700;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: #1ED760; 
+}
+
+.navbar-custom .form-control {
+    width: 100%;
+    border-radius: 50px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333;
+    background-color: #181818;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.navbar-custom .form-control:focus {
+    border-color: #1DB954; 
+    outline: none;
+}
+
+.navbar-custom .btn-outline-success {
+    border-radius: 50px;
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-custom .btn-outline-success:hover {
+    background-color: #1ED760; 
+}
