@@ -12,8 +12,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #fff !important; 
-    padding: 20px; 
+    background: linear-gradient(rgba(79, 201, 85, 0.6), rgba(1, 68, 33, 0.6)), 
+                url('https://images.pexels.com/photos/6985185/pexels-photo-6985185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Set your image URL here */
+    background-size: cover; 
 }
 
 .container {
@@ -71,7 +72,7 @@ h3.animated-text {
     font-size: 24px;
     font-weight: 600;
     text-align: center;
-    color: #1DB954;
+    color: #000000;
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -82,11 +83,15 @@ h3.animated-text {
 
 .spinner-border {
     border-width: 4px;
-    color: #1DB954;
+    color: #1DB954 !important; /* Important to ensure it overrides Bootstrap's color */
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto;
+    display: block;
 }
 
 .text-danger {
-    color: #e80074;
+    color: #e80074 !important;
 }
 
 button.btn-outline-success {
@@ -98,18 +103,6 @@ button.btn-outline-success {
 button.btn-outline-success:hover {
     background-color: #1DB954;
     color: #fff;
-}
-
-@media (max-width: 768px) {
-
-    .track-card button {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    h3.animated-text {
-        font-size: 24px;
-    }
 }
 
 .img-fluid.artistic-img { 

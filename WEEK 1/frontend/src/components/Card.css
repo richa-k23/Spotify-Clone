@@ -1,0 +1,100 @@
+.card-container {
+    padding-top: 20px !important;  /* Add some padding at the top */
+    padding-left: 15px;  /* Left padding */
+    padding-right: 15px;  /* Right padding */
+    padding-bottom: 20px;  /* Bottom padding */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;  /* Ensure proper spacing between cards */
+  }
+
+.card {
+    background-color: #181818;
+    border-radius: 12px; /* Smooth corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    overflow: hidden;
+    position: relative;
+    height: auto;
+    margin-top: 10px; /* Ensure cards are not cut off from the top */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Slight lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
+}
+
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 250px; /* Adjust height to avoid overflow */
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.song-title {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .song-title:hover {
+    color: #1DB954;
+  }
+  
+.add-options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-options button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+}
+
+.add-options button:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.card-text {
+    font-size: 14px;
+    color: #b3b3b3; /* Lighter text color */
+    margin-bottom: 10px;
+}
+
+.music-controls {
+    margin-top: auto; /* Push audio controls to the bottom */
+}
+
+button.btn-outline-success {
+    border-color: #1DB954;
+    color: #1DB954;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-outline-success:hover {
+    background-color: #1DB954;
+    color: #fff;
+}
+
+.spinner-border {
+    border-width: 3px;
+    color: #1DB954 !important;
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

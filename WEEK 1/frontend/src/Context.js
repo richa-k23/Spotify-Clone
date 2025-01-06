@@ -33,11 +33,13 @@ export const MusicContext = createContext();
 
 export const MusicProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [likedMusic, setLikedMusic] = useState([]);
+    const [pinnedMusic, setPinnedMusic] = useState([]);
     const [resultOffset, setResultOffset] = useState(0);
 
     return React.createElement(
         MusicContext.Provider,
-        { value: { isLoading, setIsLoading, resultOffset, setResultOffset } },
+        { value: { isLoading, setIsLoading, likedMusic, setLikedMusic, resultOffset, setResultOffset, pinnedMusic, setPinnedMusic } },
         children
     );
 };

@@ -1,44 +1,86 @@
 .navbar-custom {
-    background-color: #121212;
-    height: 80px;
+    background-color: #191414;
+    color: #ffffff;
+    width: 100vw;
 }
 
 .navbar-custom .navbar-brand {
     color: #1DB954;
-    font-weight: 700;
-    font-size: 24px;
-    flex-shrink: 0;
+    font-weight: bold;
 }
 
 .navbar-custom .navbar-brand:hover {
     color: #1ED760; 
 }
 
-.navbar-custom .form-control {
-    width: 100%;
-    border-radius: 50px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #333;
-    background-color: #181818;
-    color: #fff;
-    transition: border-color 0.3s ease;
+.navbar-custom .navbar-toggler-icon {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"');
 }
 
-.navbar-custom .form-control:focus {
-    border-color: #1DB954; 
-    outline: none;
+.navbar-custom .form-control {
+    border-radius: 20px;
+    border: 1px solid #1DB954;
 }
 
 .navbar-custom .btn-outline-success {
-    border-radius: 50px;
-    background-color: #1DB954;
-    color: white;
-    border: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    color: #1DB954;
+    border-color: #1DB954;
 }
 
 .navbar-custom .btn-outline-success:hover {
     background-color: #1ED760; 
+}
+
+.navbar-custom .btn-outline-light {
+    color: #1DB954; 
+    border-color: #1DB954; 
+}
+
+.navbar-custom .btn-outline-light:hover {
+    background-color: #1ED760;
+    color:#ffffff;
+}
+
+/* Common styling for the badge on both Like and Pin buttons */
+.badge {
+    font-weight: bold; /* Make text bold */
+    font-size: 0.75rem; /* Adjust font size */
+    background-color: #1ED760; /* Green color */
+    color: #ffffff; /* Text color inside the badge */
+    border-radius: 50%; /* Circle shape */
+    padding: 5px 10px; /* Adjust size of the badge */
+}
+
+/* Change badge color when hovered */
+.btn:hover .badge {
+    background-color: #191414;
+    
+}
+
+/* Modal content styling */
+.fullscreen-modal .modal-content {
+    width: 140%;  /* Use 90% of the screen width */
+    height: 85vh;  /* Use 90% of the screen height */
+    padding: 8px;  /* Add padding inside the modal */
+    border-radius: 8px;  /* Round the corners of the modal */
+}
+
+/* Modal header, footer, and body styling */
+.modal-header, .modal-footer {
+    color: #ffffff;
+    padding: 20px;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;  /* Wrap cards if there's too many */
+    padding: 20px;
+    overflow-y: auto;  /* Allow scrolling if content exceeds screen height */
+}
+
+/* Change the color of modal headings (Liked Music and Pinned Music) */
+.modal-header h5 {
+    color: #1DB954;  /* Apply the Spotify green color */
 }

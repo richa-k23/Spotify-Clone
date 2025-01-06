@@ -8,7 +8,6 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #121212 !important;
 }
 
 body {
@@ -16,8 +15,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #121212 !important;
-    font-family: 'Spotify', sans-serif !important;
+    background: linear-gradient(rgba(79, 201, 85, 0.6), rgba(1, 68, 33, 0.6)), 
+                url('https://images.pexels.com/photos/6985185/pexels-photo-6985185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Set your image URL here */
+    background-size: cover; 
 }
 
 .signup-container {

@@ -1,4 +1,7 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Card from './Card';
+import CreatePlaylist from './CreatePlaylist';
+import { initializePlaylist } from '../initialize';
 import { MusicContext } from '../Context';
 import Navbar from './Navbar';
 import './Home.css';
@@ -9,18 +12,17 @@ function Home() {
     const [tracks, setTracks] = useState([]);
     const [token, setToken] = useState(null);
     const [hasSearched, setHasSearched] = useState(false);
-    const [currentTrack, setCurrentTrack] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(new Audio());
 
-    const { isLoading, setIsLoading, resultOffset, setResultOffset } = useContext(MusicContext);
+    const {
+        isLoading,
+        setIsLoading,
+        setLikedMusic,
+        setPinnedMusic,
+        resultOffset,
+        setResultOffset
+    } = useContext(MusicContext);
 
     const fetchMusicData = async (query = '', offset = 0) => {
-        if (!token) {
-            console.error('No token available');
-            return;
-        }
-
         setTracks([]);
         setMessage('');
         window.scrollTo(0, 0);
@@ -43,7 +45,8 @@ function Home() {
 
             const jsonData = await response.json();
             console.log('Fetched data:', jsonData);
-            jsonData.tracks.items.forEach(track => {
+
+            jsonData.tracks.items.forEach((track) => {
                 if (track.preview_url) {
                     console.log(`Preview URL for ${track.name}: ${track.preview_url}`);
                 } else {
@@ -51,7 +54,7 @@ function Home() {
                     console.log(`No preview URL for ${track.name}`);
                 }
             });
-            
+
             setTracks(jsonData.tracks.items.slice(0, 10));
             setHasSearched(true);
         } catch (error) {
@@ -75,6 +78,8 @@ function Home() {
     };
 
     useEffect(() => {
+        initializePlaylist();
+
         const fetchToken = async () => {
             try {
                 setIsLoading(true);
@@ -84,8 +89,11 @@ function Home() {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body:
-                        'grant_type=client_credentials&client_id=b7a8529c921d4cf89e5c26f620d64899&client_secret=f5b9dc475d5248da937ccd8238200f59',
+                    body: new URLSearchParams({
+                        grant_type: 'client_credentials',
+                        client_id: 'b7a8529c921d4cf89e5c26f620d64899',
+                        client_secret: '7537626cf9ca4a53808f9d5f20cb4436',
+                    }),
                 });
 
                 if (!response.ok) {
@@ -94,6 +102,8 @@ function Home() {
 
                 const jsonData = await response.json();
                 setToken(jsonData.access_token);
+
+                fetchMusicData('genre:indian');
                 console.log('Token fetched:', jsonData.access_token);
             } catch (error) {
                 setMessage("We couldn't retrieve the token. Please try again.");
@@ -104,26 +114,20 @@ function Home() {
         };
 
         fetchToken();
-    }, [setIsLoading]);
-
-    const playSong = (track) => {
-        if (currentTrack && currentTrack.id === track.id && isPlaying) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-        } else {
-            audioRef.current.src = track.preview_url || '';
-            audioRef.current.load();
-            audioRef.current.play();
-            setCurrentTrack(track);
-            setIsPlaying(true);
-        }
-    };
+        setLikedMusic(JSON.parse(localStorage.getItem('likedMusic')) || []);
+        setPinnedMusic(JSON.parse(localStorage.getItem('pinnedMusic')) || []);
+    }, [setIsLoading, setLikedMusic, setPinnedMusic]);
 
     useEffect(() => {
-        return () => {
-            audioRef.current.pause();
-        };
-    }, []);
+        if (token && !hasSearched) {
+            fetchMusicData('genre:indian');
+            setHasSearched(true);
+        }
+    }, [token, hasSearched]);
+
+    const playSong = (track) => {
+        console.log(`Playing song: ${track.name}`);
+    };
 
     return React.createElement(
         'div',
@@ -163,41 +167,33 @@ function Home() {
                     )
                 ),
 
-            hasSearched && tracks.length > 0
-                ? tracks.map((track) =>
-                      React.createElement(
-                          'div',
-                          { key: track.id, className: 'col-12 mb-3' },
+            React.createElement(
+                'div',
+                { className: 'row' },
+                tracks.length > 0
+                    ? tracks.map((element) =>
                           React.createElement(
-                              'div',
-                              { className: 'track-info p-3 border rounded' },
-                              React.createElement('h5', null, track.name),
-                              React.createElement('p', null, track.artists[0].name),
+                              Card,
+                              { key: element.id, element: element },
                               React.createElement(
                                   'button',
                                   {
-                                      onClick: () => playSong(track),
+                                      onClick: () => playSong(element),
                                       className: 'btn btn-primary mt-2',
                                   },
-                                  currentTrack && currentTrack.id === track.id && isPlaying ? 'Pause' : 'Play'
+                                  'Play'
                               )
                           )
                       )
-                  )
-                : !hasSearched &&
-                  React.createElement(
-                      'div',
-                      { className: 'col-12 py-5 text-center' },
-                      React.createElement('h3', { className: 'animated-text py-5' }, 'Please search for your favourite song'),
-                      React.createElement('br'),
-                      React.createElement('img', {
-                          src: 'https://images.pexels.com/photos/934067/pexels-photo-934067.jpeg',
-                          alt: 'Lyric Notes Image',
-                          className: 'img-fluid artistic-img',
-                      })
-                  ),
+                    : React.createElement(
+                          'div',
+                          { className: 'col-12 text-center' },
+                          React.createElement('p', null, 'No tracks available. Please perform a search.')
+                      )
+            ),
 
-            hasSearched && tracks.length > 0 &&
+            hasSearched &&
+                tracks.length > 0 &&
                 React.createElement(
                     'div',
                     { className: 'row' },
@@ -233,6 +229,15 @@ function Home() {
                         )
                     )
                 )
+        ),
+        React.createElement(
+            'div',
+            { className: 'modal fade position-absolute', id: 'exampleModal', tabIndex: '-1', 'aria-labelledby': 'exampleModalLabel', 'aria-hidden': 'true' },
+            React.createElement(
+                'div',
+                null,
+                React.createElement(CreatePlaylist, null)
+            )
         )
     );
 }
